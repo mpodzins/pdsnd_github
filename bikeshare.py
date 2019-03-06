@@ -79,7 +79,7 @@ def load_data(city, month, day):
         # use the index of the months list to get the corresponding int
         months = ['january', 'february', 'march', 'april', 'may', 'june']
         month = months.index(month) + 1
-    
+
         # filter by month to create the new dataframe
         df = df[df['month'] == month]
 
@@ -159,7 +159,7 @@ def trip_duration_stats(df):
     total_travel_time = np.sum(df['Travel Time'])
     totalDays = str(total_travel_time).split()[0]
     clock = str(total_travel_time).split()[2]
-    print ("\nThe total travel time was " + totalDays + " days " + clock.split(':')[0] + " hours " + clock.split(':')[1] + " minutes" + "\n") 
+    print ("\nThe total travel time was " + totalDays + " days " + clock.split(':')[0] + " hours " + clock.split(':')[1] + " minutes" + "\n")
 
     # TO DO: display mean travel time
     mean_travel_time = np.mean(df['Travel Time'])
@@ -206,17 +206,23 @@ def user_stats(df):
     except:
         print('\nThere is no data about birth available for this city!')
     print('-'*40)
-    
+
 def five_more(df):
+    """
+    Prompts the user if they want to see 5 lines of raw data,
+    displays that data if the answer is 'yes',
+    and continues these prompts and displays until the user says 'no'. 
+    """
+
     i = 0
     while True:
         more_data = input('Would you like to see raw data? Please enter yes or no: ').lower()
         if more_data not in ('yes', 'y'):
             break
-        else:    
+        else:
             print(df.iloc[i:i+5])
             i += 5
-            
+
 
 
 
