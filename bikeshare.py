@@ -79,7 +79,7 @@ def load_data(city, month, day):
         # use the index of the months list to get the corresponding int
         months = ['january', 'february', 'march', 'april', 'may', 'june']
         month = months.index(month) + 1
-    
+
         # filter by month to create the new dataframe
         df = df[df['month'] == month]
 
@@ -153,16 +153,14 @@ def trip_duration_stats(df):
     start_time = time.time()
 
     # TO DO: display total travel time
-    df['End Time'] = pd.to_datetime(df['End Time'])
-    df['Start Time'] = pd.to_datetime(df['Start Time'])
-    df['Travel Time'] = df['End Time'] - df['Start Time']
-    total_travel_time = np.sum(df['Travel Time'])
+    
+    total_travel_time = np.sum(pd.to_datetime(df['End Time']) - pd.to_datetime(df['Start Time']))
     totalDays = str(total_travel_time).split()[0]
     clock = str(total_travel_time).split()[2]
-    print ("\nThe total travel time was " + totalDays + " days " + clock.split(':')[0] + " hours " + clock.split(':')[1] + " minutes" + "\n") 
+    print ("\nThe total travel time was " + totalDays + " days " + clock.split(':')[0] + " hours " + clock.split(':')[1] + " minutes" + "\n")
 
     # TO DO: display mean travel time
-    mean_travel_time = np.mean(df['Travel Time'])
+    mean_travel_time = np.mean(pd.to_datetime(df['End Time']) - pd.to_datetime(df['Start Time']))
     clock1 = str(mean_travel_time).split()[2]
     print("The mean travel time was " + clock1.split(':')[0] + " hours " + clock1.split(':')[1] + " minutes\n")
 
@@ -206,17 +204,17 @@ def user_stats(df):
     except:
         print('\nThere is no data about birth available for this city!')
     print('-'*40)
-    
+
 def five_more(df):
     i = 0
     while True:
         more_data = input('Would you like to see raw data? Please enter yes or no: ').lower()
         if more_data not in ('yes', 'y'):
             break
-        else:    
+        else:
             print(df.iloc[i:i+5])
             i += 5
-            
+
 
 
 
@@ -231,7 +229,7 @@ def main():
         user_stats(df)
         five_more(df)
 
-        restart = input('\nWould you like to restart? Enter yes or no.\n')
+        restart = input('\nWould you like to restart? Enter yes or no: ')
         if restart.lower() != 'yes':
             break
 
