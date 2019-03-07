@@ -153,18 +153,16 @@ def trip_duration_stats(df):
     start_time = time.time()
 
     # TO DO: display total travel time
-    df['End Time'] = pd.to_datetime(df['End Time'])
-    df['Start Time'] = pd.to_datetime(df['Start Time'])
-    df['Travel Time'] = df['End Time'] - df['Start Time']
-    total_travel_time = np.sum(df['Travel Time'])
+
+    total_travel_time = np.sum(pd.to_datetime(df['End Time']) - pd.to_datetime(df['Start Time']))
     totalDays = str(total_travel_time).split()[0]
     clock = str(total_travel_time).split()[2]
     print ("\nThe total travel time was " + totalDays + " days " + clock.split(':')[0] + " hours " + clock.split(':')[1] + " minutes" + "\n")
 
     # TO DO: display mean travel time
-    mean_travel_time = np.mean(df['Travel Time'])
+    mean_travel_time = np.mean(pd.to_datetime(df['End Time']) - pd.to_datetime(df['Start Time']))
     clock1 = str(mean_travel_time).split()[2]
-    print("The mean travel time was " + clock1.split(':')[0] + " hours " + clock1.split(':')[1] + " minutes\n")
+    print("The mean travel time was {} hours {} minutes\n".format(clock1.split(':')[0], clock1.split(':')[1]))
 
 
     print("\nThis took %s seconds." % (time.time() - start_time))
@@ -237,7 +235,7 @@ def main():
         user_stats(df)
         five_more(df)
 
-        restart = input('\nWould you like to restart? Enter yes or no.\n')
+        restart = input('\nWould you like to restart? Enter yes or no: ')
         if restart.lower() != 'yes':
             break
 
