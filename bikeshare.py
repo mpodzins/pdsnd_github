@@ -153,7 +153,7 @@ def trip_duration_stats(df):
     start_time = time.time()
 
     # TO DO: display total travel time
-    
+
     total_travel_time = np.sum(pd.to_datetime(df['End Time']) - pd.to_datetime(df['Start Time']))
     totalDays = str(total_travel_time).split()[0]
     clock = str(total_travel_time).split()[2]
@@ -162,7 +162,7 @@ def trip_duration_stats(df):
     # TO DO: display mean travel time
     mean_travel_time = np.mean(pd.to_datetime(df['End Time']) - pd.to_datetime(df['Start Time']))
     clock1 = str(mean_travel_time).split()[2]
-    print("The mean travel time was " + clock1.split(':')[0] + " hours " + clock1.split(':')[1] + " minutes\n")
+    print("The mean travel time was {} hours {} minutes\n".format(clock1.split(':')[0], clock1.split(':')[1]))
 
 
     print("\nThis took %s seconds." % (time.time() - start_time))
